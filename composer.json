@@ -1,0 +1,16 @@
+{
+  "require": {
+    "illuminate/support": "4.2.*"
+  },
+  "name": "pno/collectionof",
+  "type": "class",
+  "description": "Extends laravel's collection class to restrict collection to a certain object type",
+  "keywords": ["collection"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Patrick Noonan",
+      "email": "p.e.noonan@gmail.com"
+    }
+  ]
+}
