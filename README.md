@@ -1,6 +1,6 @@
 #Collection Of
 
-This is a helper class that I wrote for a project I'm working on and it's turned out to be pretty handy, so I decided to throw it up here. It's an extension of Laravel's "Illuminate\Support\Collection" class, and its purpose is to allow devs to restrict a Laravel Collection to only accept objects of a certain type.
+This is a helper class that I wrote for a project I'm working on and it's turned out to be pretty handy, so I decided to throw it up here. It's an extension of Laravel's "Illuminate\Support\Collection" class, and its purpose is to allow devs to restrict a Laravel Collection to only accept objects of a certain type. Frankly I'm surprised something like this didn't already exist and, if it turns out it does already exist, I won't be surprised.
 
 Note: you can really, really easily use Laravel's collections outside of Laravel by requiring "illuminate\support" in your composer.json file.
 
