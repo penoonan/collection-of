@@ -1,10 +1,10 @@
-<?php namespace Stryker\Tests;
+<?php
 
 use Illuminate\Support\Collection;
-use Stryker\Helpers\CollectionOf;
+use pno\CollectionOf\CollectionOf;
 
 class CollectionOfStub extends CollectionOf {
-    protected static $of_class = 'Stryker\Tests\Stub';
+    protected static $of_class = 'Stub';
 }
 
 class Stub {}
@@ -28,11 +28,11 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
 
     public function test_it_instantiates()
     {
-        $this->assertInstanceOf('Stryker\Tests\CollectionOfStub', $this->collection);
+        $this->assertInstanceOf('CollectionOfStub', $this->collection);
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_it_throws_exception_if_non_stubs_in_constructor()
     {
@@ -45,7 +45,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_put_throws_exception_when_invalid()
     {
@@ -60,7 +60,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_push_throws_exception_when_invalid()
     {
@@ -75,7 +75,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_prepend_throws_exception_when_invalid()
     {
@@ -90,7 +90,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_merge_throws_exception_when_invalid()
     {
@@ -105,7 +105,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Stryker\Exceptions\IllegalCollectionMemberException
+     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_make_throws_exception_when_invalid()
     {

@@ -25,6 +25,7 @@ $all_my_glorious_foos->put('this_one_has_a_key', new Foo('blargle'));
 $literally_cannot_even = new FooCollection([new Bar('foo'), 'String!?!?', ['array???'], 12345]);
 $literally_cannot_even->push(new Bar('fizz'));
 $literally_cannot_even->put('utterly_futile_key', new Bar('buzz'));
+$literally_cannot_even->merge(new Collection([new Bar()]);
 
 ```
 

@@ -1,4 +1,4 @@
-<?php namespace pno;
+<?php namespace pno\CollectionOf;
 
 use \Illuminate\Support\Collection;
 
@@ -50,7 +50,7 @@ abstract class CollectionOf extends Collection {
     protected static function validateIsOfClass($value)
     {
         if (!is_a($value, static::$of_class)) {
-            Throw new \InvalidArgumentException('Item in collection passed to '.get_called_class().' is not an instance of '.static::$of_class.'. Parameter was: ' . print_r($value, true));
+            Throw new IllegalCollectionMemberException('Item in collection passed to '.get_called_class().' is not an instance of '.static::$of_class.'. Parameter was: ' . print_r($value, true));
         }
         return true;
     }
