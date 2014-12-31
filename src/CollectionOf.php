@@ -17,46 +17,102 @@ abstract class CollectionOf extends Collection {
         parent::__construct($items);
     }
 
+    /**
+     * Create a new collection instance if the value isn't one already.
+     *
+     * @param mixed $items
+     * @return static
+     */
     public static function make($items)
     {
         static::validateItemsAreOfClass($items);
-        parent::make($items);
+        return parent::make($items);
     }
 
+    /**
+     * Merge the collection with the given items.
+     *
+     * @param \Illuminate\Support\Collection | \Illuminate\Contracts\Support\Arrayable|array $items
+     * @return static
+     */
     public function merge($items)
     {
-        static::validateItemsAreOfClass($items);
-        parent::merge($items);
+        static::validateItemsAreOfClass($items->all());
+        return parent::merge($items);
     }
 
+    /**
+     * Push an item onto the beginning of the collection.
+     *
+     * @param mixed $value
+     * @return void
+     */
     public function prepend($value)
     {
         static::validateIsOfClass($value);
         parent::prepend($value);
     }
 
+    /**
+     * Push an item onto the end of the collection.
+     *
+     * @param mixed $value
+     * @return void
+     */
     public function push($value)
     {
         static::validateIsOfClass($value);
         parent::push($value);
     }
 
+    /**
+     * Put an item in the collection by key.
+     *
+     * @param mixed $key
+     * @param mixed $value
+     * @return void
+     */
     public function put($key, $value)
     {
         static::validateIsOfClass($value);
         parent::put($key, $value);
     }
 
+    /**
+     * Set the item at a given offset.
+     *
+     * @param mixed $key
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet($key, $value)
+    {
+        static::validateIsOfClass($value);
+        parent::offsetSet($key, $value);
+    }
+
+    /**
+     * Validate that a single item is an instance of the required class
+     * @param $value
+     * @return bool
+     * @throws IllegalCollectionMemberException
+     */
     protected static function validateIsOfClass($value)
     {
         if (!is_a($value, static::$of_class)) {
-            Throw new IllegalCollectionMemberException('Item in collection passed to '.get_called_class().' is not an instance of '.static::$of_class.'. Parameter was: ' . print_r($value, true));
+            Throw new IllegalCollectionMemberException('Item in collection passed to ' . get_called_class() . ' is not an instance of ' . static::$of_class . '. Parameter was: ' . print_r($value, true));
         }
         return true;
     }
 
-    protected static function validateItemsAreOfClass(array $items) {
-        foreach($items as $key => $value) {
+    /**
+     * Validate that all items in a given array are instances of the required class
+     * @param array $items
+     * @throws IllegalCollectionMemberException
+     */
+    protected static function validateItemsAreOfClass(array $items)
+    {
+        foreach ($items as $key => $value) {
             static::validateIsOfClass($value);
         }
     }

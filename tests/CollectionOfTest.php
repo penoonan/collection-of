@@ -10,7 +10,7 @@ class CollectionOfStub extends CollectionOf {
 class Stub {}
 
 class CollectionOfTest extends \PHPUnit_Framework_TestCase {
-
+    
     /**
      * @var \CollectionOfStub
      */
@@ -32,7 +32,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_it_throws_exception_if_non_stubs_in_constructor()
     {
@@ -45,7 +45,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_put_throws_exception_when_invalid()
     {
@@ -60,7 +60,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_push_throws_exception_when_invalid()
     {
@@ -75,7 +75,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_prepend_throws_exception_when_invalid()
     {
@@ -90,7 +90,7 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_merge_throws_exception_when_invalid()
     {
@@ -104,8 +104,15 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
         $this->assertSame($stub, $result->first());
     }
 
+    public function test_merge_result_is_instance_of_given_collection()
+    {
+        $stub = new Stub();
+        $result = $this->collection->merge(new Collection([$stub]));
+        $this->assertInstanceOf('CollectionOfStub', $result);
+    }
+
     /**
-     * @expectedException pno\CollectionOf\IllegalCollectionMemberException
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
      */
     public function test_make_throws_exception_when_invalid()
     {
@@ -117,6 +124,37 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
         $stub = new Stub();
         $result = $this->collection->make([$stub]);
         $this->assertSame($stub, $result->first());
+    }
+
+    public function test_make_result_is_instance_of_given_collection()
+    {
+        $stub = new Stub();
+        $result = $this->collection->make([$stub]);
+        $this->assertInstanceOf('CollectionOfStub', $result);
+    }
+
+    /**
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
+     */
+    public function test_offsetSet_throws_exception_when_invalid_with_key_given()
+    {
+        $this->collection['foo'] = 'bar';
+    }
+
+    /**
+     * @expectedException \pno\CollectionOf\IllegalCollectionMemberException
+     */
+    public function test_offsetSet_throws_exception_when_invalid_without_key_given()
+    {
+        $this->collection[] = 'bar';
+    }
+
+    public function test_offsetSet_throws_no_exception_when_valid()
+    {
+        $this->collection[] = new Stub();
+        $this->collection['stub'] = new Stub();
+
+        $this->assertEquals(2, $this->collection->count());
     }
 
 }
