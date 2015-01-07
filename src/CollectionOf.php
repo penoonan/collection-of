@@ -122,12 +122,9 @@ abstract class CollectionOf extends Collection {
      * @param array|Collection|\Illuminate\Support\Contracts\ArrayableInterface $items
      * @return static
      */
-    public function diff($items, $by_reference = true)
+    public function diff($items)
     {
-        if($by_reference) {
-            return new static(array_udiff($this->items, $this->getArrayableItems($items), [$this, 'diffObjectsByReference']));
-        }
-        return new static(array_udiff($this->items, $this->getArrayableItems($items), [$this, 'diffObjectsByValue']));
+        return new static(array_udiff($this->items, $this->getArrayableItems($items), [$this, 'diffObjectsByReference']));
     }
 
     /**
@@ -139,21 +136,8 @@ abstract class CollectionOf extends Collection {
      */
     protected function diffObjectsByReference($a, $b)
     {
-        if ($a === $b) return 0;
-        return -1;
+        return strcmp(spl_object_hash($a), spl_object_hash($b));
     }
 
-    /**
-     * Used in $this->diff() array_udiff call to see if two collections
-     * contain objects of the same types and values, not same instances
-     * @param $a
-     * @param $b
-     * @return int
-     */
-    protected function diffObjectsByValue($a, $b)
-    {
-        if ($a == $b) return 0;
-        return -1;
-    }
 
 }

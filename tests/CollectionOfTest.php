@@ -157,4 +157,18 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(2, $this->collection->count());
     }
 
+    public function test_diff_works()
+    {
+        $foo1 = new Stub();
+        $foo2 = new Stub();
+        $foo3 = new Stub();
+
+        $coll1 = new CollectionOfStub([$foo1, $foo2, $foo3]);
+        $coll2 = new CollectionOfStub([$foo1, $foo2]);
+
+        $result = $coll1->diff($coll2);
+
+        $this->assertEquals(1, $result->count());
+    }
+
 }
