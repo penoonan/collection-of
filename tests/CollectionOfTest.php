@@ -10,7 +10,7 @@ class CollectionOfStub extends CollectionOf {
 class Stub {}
 
 class CollectionOfTest extends \PHPUnit_Framework_TestCase {
-    
+
     /**
      * @var \CollectionOfStub
      */
